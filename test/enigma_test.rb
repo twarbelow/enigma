@@ -11,7 +11,7 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_it_can_offset
-    assert_equal ([04, 40, 08, 09, 95]), @enigma.offset("040895")
+    assert_equal ({A: 1, B: 0, C: 2, D: 5}), @enigma.offset("040895")
   end
 
   def test_it_can_encrypt
