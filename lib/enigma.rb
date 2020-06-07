@@ -3,7 +3,7 @@ class Enigma
   end
 
   def make_offset(date)
-    num_array = ((date.to_i ** 2) % 10000).to_s.split(//)
+    num_array = ((date.to_i ** 2) % 10000).to_s.split("")
     num_array.map {|num| num.to_i}
   end
 
@@ -18,6 +18,7 @@ class Enigma
     result
   end
 
+# refactor this so the making of k_o is its own method
   def make_shift(key, date)
     k = make_key(key)
     o = make_offset(date)
