@@ -18,6 +18,10 @@ class EnigmaTest < MiniTest::Test
     assert_equal ([2, 27, 71, 15]), @enigma.make_key("02715")
   end
 
+  def test_it_can_make_k_o
+    assert_equal ([3, 27, 73, 20]), @enigma.make_k_o
+  end
+
   def test_it_can_make_shift
     assert_equal ({A: 3, B: 27, C: 73, D: 20}), @enigma.make_shift("02715", "040895")
   end
