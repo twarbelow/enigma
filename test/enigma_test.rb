@@ -11,11 +11,12 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_it_can_do_offset
-    assert_equal ({A: 1, B: 0, C: 2, D: 5}), @enigma.offset("040895")
+    assert_equal ([1, 0, 2, 5]), @enigma.offset("040895")
   end
 
   def test_it_can_do_key
-    assert_equal ({A: 02, B: 27, C: 71, D: 15}), @enigma.key("02715")
+    skip
+    assert_equal ([2, 27, 71, 15]), @enigma.key("02715")
   end
 
   def test_it_can_encrypt
