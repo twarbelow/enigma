@@ -10,8 +10,12 @@ class EnigmaTest < MiniTest::Test
     @enigma = Enigma.new
   end
 
-  def test_it_can_offset
+  def test_it_can_do_offset
     assert_equal ({A: 1, B: 0, C: 2, D: 5}), @enigma.offset("040895")
+  end
+
+  def test_it_can_do_key
+    assert_equal ({A: 02, B: 27, C: 71, D: 15}), @enigma.key("02715")
   end
 
   def test_it_can_encrypt
