@@ -19,7 +19,7 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_it_can_make_shift
-    assert_equal ({A: 3, B: 27, C: 73, D: 20}), @enigma.make_shift("040895", "02715")
+    assert_equal ({A: 3, B: 27, C: 73, D: 20}), @enigma.make_shift("02715", "040895")
   end
 
   def test_it_can_encrypt
