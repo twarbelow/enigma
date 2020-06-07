@@ -19,8 +19,13 @@ class Enigma
   end
 
   def make_shift(offset, key)
-    offset.zip(key).map do |offset, key|
-      offset+key
+    k = make_key(key)
+    o = make_offset(offset)
+    shift_keys = [:A, :B, :C, :D]
+    k_o= o.zip(k).map do |o, k|
+      o+k
     end
+    
+
   end
 end
