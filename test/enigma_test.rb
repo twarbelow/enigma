@@ -1,3 +1,5 @@
+require "simplecov"
+SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'date'
@@ -8,7 +10,12 @@ class EnigmaTest < MiniTest::Test
     @enigma = Enigma.new
   end
 
+  def test_it_can_offset
+    assert_equal ([04, 40, 08, 09, 95]), @enigma.offset("040895")
+  end
+
   def test_it_can_encrypt
+    skip
     assert_equal ({
       encryption: "keder ohulw",
       key: "02715",
