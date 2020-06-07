@@ -18,14 +18,13 @@ class Enigma
     result
   end
 
-  def make_shift(offset, key)
+  def make_shift(key, date)
     k = make_key(key)
-    o = make_offset(offset)
+    o = make_offset(date)
     shift_keys = [:A, :B, :C, :D]
     k_o= o.zip(k).map do |o, k|
       o+k
     end
-    
-
+    Hash[shift_keys.zip(k_o)]
   end
 end
