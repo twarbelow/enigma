@@ -71,6 +71,14 @@ class EnigmaTest < MiniTest::Test
       :key=>"02715",
       :date=>Time.now.strftime("%d%m%y")}), @enigma.decrypt("nib udmcxpu", "02715")
   end
+
+  def test_it_can_encrypt_without_key_and_date
+    encrypt_hash = @enigma.encrypt("hello world")
+    key = encrypt_hash[:key]
+    date = encrypt_hash[:date]
+    encrypted = encrypt_hash[:encryption]
+    assert_equal ({:decryption=> "hello world", :key=> key, :date=> date}), @enigma.decrypt(encrypted, key)
+  end
 end
 
 # encrypt a message (generates random key and uses today's date)
