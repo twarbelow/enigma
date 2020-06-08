@@ -1,22 +1,23 @@
 require 'date'
 
 class Enigma
-  attr_reader :shift_array, :alphabet
+  attr_reader :shift_array, :alphabet, :msg_array
   def initialize
     @shift_array = []
     @alphabet = {}
+    @msg_array = []
   end
 
   def encrypt(message, key, date = Date.today)
     add_k_o(key, date)
-    make_message_array(message)
+    make_msg_array(message)
     make_alphabet
 
     # take message, iterate over elements
   end
 
-  def make_message_array(message)
-    message.split("")
+  def make_msg_array(message)
+    @msg_array = message.split("")
   end
 
   def make_offset(date)
@@ -41,13 +42,11 @@ class Enigma
     o.zip(k) do |o, k|
       shift_array << o+k
     end
-    shift_array
   end
 
   def make_alphabet
     @alphabet = Hash[("a".."z").to_a.map.with_index { |letter, number| [letter, (number+1)] } ]
     @alphabet[" "] = 27
-    alphabet
   end
 end
 
