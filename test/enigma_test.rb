@@ -59,26 +59,19 @@ class EnigmaTest < MiniTest::Test
       @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
-  # do I need to somehow stub the date? how?
   def test_it_can_encrypt_with_only_key
     assert_equal ({:encryption=>"nib udmcxpu",
       :key=>"02715",
-      :date=>"080620"}),
+      :date=>Time.now.strftime("%d%m%y")}),
       @enigma.encrypt("hello world", "02715")
   end
 
   def test_it_can_decrypt_with_only_key
     assert_equal ({:decryption=>"hello world",
       :key=>"02715",
-      :date=>"080620"}), @enigma.decrypt("nib udmcxpu", "02715")
+      :date=>Time.now.strftime("%d%m%y")}), @enigma.decrypt("nib udmcxpu", "02715")
   end
 end
-
-
-
-#decrypt a message with a key (uses today's date)
-# pry(main) > enigma.decrypt(encrypted[:encryption], "02715")
-#=> # decryption hash here
 
 # encrypt a message (generates random key and uses today's date)
 # pry(main)> enigma.encrypt("hello world")
