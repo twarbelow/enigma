@@ -1,5 +1,22 @@
+require 'date'
+
 class Enigma
-  def encrypt(message, key, date)
+  attr_reader :shift_array, :alphabet
+  def initialize
+    @shift_array = []
+    @alphabet = Hash[("a".."z").to_a.map.with_index { |letter, number| [letter, (number+1)] } ]
+alphabet[" "] = 27
+  end
+
+  def encrypt(message, key, date = Date.today)
+    add_k_o(key, date)
+    make_message_array(message)
+
+    # take message, iterate over elements
+  end
+
+  def make_message_array(message)
+    message.split("")
   end
 
   def make_offset(date)
@@ -18,14 +35,19 @@ class Enigma
     result
   end
 
-# refactor this so the making of k_o is its own method
-  def make_shift(key, date)
+  def add_k_o(key, date)
     k = make_key(key)
     o = make_offset(date)
-    shift_keys = [:A, :B, :C, :D]
-    k_o= o.zip(k).map do |o, k|
-      o+k
+    o.zip(k) do |o, k|
+      shift_array << o+k
     end
-    Hash[shift_keys.zip(k_o)]
+    shift_array
   end
 end
+
+# notes:
+
+## sum =  key_value_for_letter + (shift_value_for_shift_type % 27)
+## if sum > 27
+##   p sum - 27
+## end
