@@ -30,19 +30,18 @@ class EnigmaTest < MiniTest::Test
 
   def test_it_can_make_alphabet
     @enigma.make_alphabet
-    assert_equal ({"a"=>1, "b"=>2, "c"=>3, "d"=>4, "e"=>5, "f"=>6, "g"=>7, "h"=>8, "i"=>9, "j"=>10, "k"=>11, "l"=>12, "m"=>13, "n"=>14, "o"=>15, "p"=>16, "q"=>17, "r"=>18, "s"=>19, "t"=>20, "u"=>21, "v"=>22, "w"=>23, "x"=>24, "y"=>25, "z"=>26, " "=>27}), @enigma.alphabet
+    assert_equal ({"a"=>1, "b"=>2, "c"=>3, "d"=>4, "e"=>5, "f"=>6, "g"=>7, "h"=>8, "i"=>9, "j"=>10, "k"=>11, "l"=>12, "m"=>13, "n"=>14, "o"=>15, "p"=>16, "q"=>17, "r"=>18, "s"=>19, "t"=>20, "u"=>21, "v"=>22, "w"=>23, "x"=>24, "y"=>25, "z"=>26, " "=>0}), @enigma.alphabet
   end
 
   def test_it_can_shift_msg
-    skip
-    @enigma.add_k_o("02715", "040895")
+    @enigma.create_shift_array("02715", "040895")
     @enigma.make_msg_array("hello world")
+    @enigma.make_alphabet
     @enigma.shift_msg
     assert_equal "keder ohulw", @enigma.encrypted_msg
   end
 
   def test_it_can_encrypt
-    skip
     assert_equal ({
       encryption: "keder ohulw",
       key: "02715",
