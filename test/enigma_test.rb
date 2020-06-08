@@ -22,12 +22,8 @@ class EnigmaTest < MiniTest::Test
     assert_equal ([3, 27, 73, 20]), @enigma.add_k_o("02715", "040895")
   end
 
-  def test_it_can_make_shift
-    assert_equal ({A: 3, B: 27, C: 73, D: 20}), @enigma.make_shift("02715", "040895")
-  end
-
   def test_it_can_make_message_array
-    assert_equal (["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]), @enigma.make_letter_array
+    assert_equal (["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]), @enigma.make_message_array("hello world")
   end
 
   def test_it_can_encrypt
