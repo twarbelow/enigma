@@ -9,7 +9,7 @@ class Enigma
     @shifted_msg = ""
   end
 
-  def encrypt(message, key, date = Date.today)
+  def encrypt(message, key, date = Time.now.strftime("%d%m%y"))
     create_shift_array(key, date)
     make_msg_array(message)
     make_alphabet
@@ -17,7 +17,7 @@ class Enigma
     {encryption: shifted_msg, key: key, date: date}
   end
 
-  def decrypt(message, key, date = Date.today)
+  def decrypt(message, key, date = Time.now.strftime("%d%m%y"))
     create_shift_array(key, date)
     make_msg_array(message)
     make_alphabet
