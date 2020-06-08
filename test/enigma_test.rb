@@ -19,7 +19,8 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_it_can_add_k_o
-    assert_equal ([3, 27, 73, 20]), @enigma.add_k_o("02715", "040895")
+    @enigma.add_k_o("02715", "040895")
+    assert_equal ([3, 27, 73, 20]), @enigma.shift_array
   end
 
   def test_it_can_make_message_array
