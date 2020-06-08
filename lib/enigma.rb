@@ -1,20 +1,28 @@
 require 'date'
 
 class Enigma
-  attr_reader :shift_array, :alphabet, :msg_array, :encrypted_msg
+  attr_reader :shift_array, :alphabet, :msg_array, :shifted_msg
   def initialize
     @shift_array = []
     @alphabet = {}
     @msg_array = []
-    @encrypted_msg = ""
+    @shifted_msg = ""
   end
 
   def encrypt(message, key, date = Date.today)
     create_shift_array(key, date)
     make_msg_array(message)
     make_alphabet
-    shift_msg
-    {encryption: encrypted_msg, key: key, date: date}
+    shift_msg("forward")
+    {encryption: shifted_msg, key: key, date: date}
+  end
+
+  def decrypt(message, key, date = Date.today)
+    create_shift_array(key, date)
+    make_msg_array(message)
+    make_alphabet
+    shift_msg("backward")
+    {decryption: shifted_msg, key: key, date: date}
   end
 
   def make_msg_array(message)
@@ -50,12 +58,16 @@ class Enigma
     @alphabet[" "] = 0
   end
 
-  def shift_msg
-    encrypted_msg_array = []
+  def shift_msg(direction)
+    shifted_msg_array = []
     msg_array.each_with_index do |char, index|
-      new_value = ((alphabet[char]) + shift_array[index % 4]) % 27
-      encrypted_msg_array << alphabet.key(new_value)
+        if direction == "forward"
+          new_value = ((alphabet[char]) + shift_array[index % 4]) % 27
+        else
+          new_value = ((alphabet[char]) - shift_array[index % 4]) % 27
+        end
+      shifted_msg_array << alphabet.key(new_value)
     end
-    @encrypted_msg = encrypted_msg_array.join
+    @shifted_msg = shifted_msg_array.join
   end
 end
