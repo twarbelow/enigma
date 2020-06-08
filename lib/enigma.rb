@@ -9,7 +9,7 @@ class Enigma
     @shifted_msg = ""
   end
 
-  def encrypt(message, key, date = Time.now.strftime("%d%m%y"))
+  def encrypt(message, key = (0...5).map { (rand(48..57)).chr }.join, date = Time.now.strftime("%d%m%y"))
     create_shift_array(key, date)
     make_msg_array(message)
     make_alphabet

@@ -80,7 +80,3 @@ class EnigmaTest < MiniTest::Test
     assert_equal ({:decryption=> "hello world", :key=> key, :date=> date}), @enigma.decrypt(encrypted, key)
   end
 end
-
-# encrypt a message (generates random key and uses today's date)
-# pry(main)> enigma.encrypt("hello world")
-# => # encryption hash here
