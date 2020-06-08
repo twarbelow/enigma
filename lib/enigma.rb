@@ -1,7 +1,7 @@
 require 'date'
 
 class Enigma
-  attr_reader :shift_array, :alphabet, :msg_array
+  attr_reader :shift_array, :alphabet, :msg_array, :encrypted_msg
   def initialize
     @shift_array = []
     @alphabet = {}
@@ -14,7 +14,6 @@ class Enigma
     make_msg_array(message)
     make_alphabet
 
-    # take message, iterate over elements
   end
 
   def make_msg_array(message)
@@ -49,7 +48,22 @@ class Enigma
     @alphabet = Hash[("a".."z").to_a.map.with_index { |letter, number| [letter, (number+1)] } ]
     @alphabet[" "] = 27
   end
+
+  def shift_msg
+    encrypted_msg_array = []
+    msg_array.each_with_index do |char, index|
+      new_value = (alphabet[char]) + shift_array[index % 4]
+      until new_value <= 27
+        if new_value > 27
+          new_value = new_value - 27
+        end
+      end
+      encrypted_msg_array << alphabet.key(new_value)
+    end
+    @encrypted_msg = encrypted_msg_array.join
+  end
 end
+
 
 # notes:
 
