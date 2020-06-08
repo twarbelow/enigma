@@ -1,6 +1,6 @@
 # enigma
 
-##Initial branch work
+## Initial branch work
 -feeling pretty good about it, wondering where to use modules/inheritance 
 
 ## Issues
