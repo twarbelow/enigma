@@ -4,13 +4,13 @@ class Enigma
   attr_reader :shift_array, :alphabet
   def initialize
     @shift_array = []
-    @alphabet = Hash[("a".."z").to_a.map.with_index { |letter, number| [letter, (number+1)] } ]
-alphabet[" "] = 27
+    @alphabet = {}
   end
 
   def encrypt(message, key, date = Date.today)
     add_k_o(key, date)
     make_message_array(message)
+    make_alphabet
 
     # take message, iterate over elements
   end
@@ -42,6 +42,12 @@ alphabet[" "] = 27
       shift_array << o+k
     end
     shift_array
+  end
+
+  def make_alphabet
+    @alphabet = Hash[("a".."z").to_a.map.with_index { |letter, number| [letter, (number+1)] } ]
+    @alphabet[" "] = 27
+    alphabet
   end
 end
 
