@@ -6,10 +6,11 @@ class Enigma
     @shift_array = []
     @alphabet = {}
     @msg_array = []
+    @encrypted_msg = ""
   end
 
   def encrypt(message, key, date = Date.today)
-    add_k_o(key, date)
+    create_shift_array(key, date)
     make_msg_array(message)
     make_alphabet
 
@@ -36,7 +37,7 @@ class Enigma
     result
   end
 
-  def add_k_o(key, date)
+  def create_shift_array(key, date)
     k = make_key(key)
     o = make_offset(date)
     o.zip(k) do |o, k|
