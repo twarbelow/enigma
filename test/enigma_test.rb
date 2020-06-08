@@ -23,8 +23,9 @@ class EnigmaTest < MiniTest::Test
     assert_equal ([3, 27, 73, 20]), @enigma.shift_array
   end
 
-  def test_it_can_make_message_array
-    assert_equal (["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]), @enigma.make_message_array("hello world")
+  def test_it_can_make_msg_array
+    @enigma.make_msg_array("hello world")
+    assert_equal (["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]), @enigma.msg_array
   end
 
   def test_it_can_make_alphabet
