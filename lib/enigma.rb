@@ -13,7 +13,8 @@ class Enigma
     create_shift_array(key, date)
     make_msg_array(message)
     make_alphabet
-
+    shift_msg
+    {encryption: encrypted_msg, key: key, date: date}
   end
 
   def make_msg_array(message)
@@ -46,28 +47,15 @@ class Enigma
 
   def make_alphabet
     @alphabet = Hash[("a".."z").to_a.map.with_index { |letter, number| [letter, (number+1)] } ]
-    @alphabet[" "] = 27
+    @alphabet[" "] = 0
   end
 
   def shift_msg
     encrypted_msg_array = []
     msg_array.each_with_index do |char, index|
-      new_value = (alphabet[char]) + shift_array[index % 4]
-      until new_value <= 27
-        if new_value > 27
-          new_value = new_value - 27
-        end
-      end
+      new_value = ((alphabet[char]) + shift_array[index % 4]) % 27
       encrypted_msg_array << alphabet.key(new_value)
     end
     @encrypted_msg = encrypted_msg_array.join
   end
 end
-
-
-# notes:
-
-## sum =  key_value_for_letter + (shift_value_for_shift_type % 27)
-## if sum > 27
-##   p sum - 27
-## end
