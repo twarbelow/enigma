@@ -3,12 +3,11 @@ SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'date'
-require './lib/enigma'
 require './lib/christopher'
 
 class ChristopherTest < MiniTest::Test
   def setup
-    christopher = Christopher.new
+    @christopher = Christopher.new
   end
 
   def test_it_can_find_shift_for_crack
