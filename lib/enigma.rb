@@ -11,7 +11,7 @@ class Enigma
 
   def encrypt(message, key = (0...5).map { (rand(48..57)).chr }.join, date = Time.now.strftime("%d%m%y"))
     create_shift_array(key, date)
-    make_msg_array(message)
+    make_msg_array(message.downcase)
     make_alphabet
     shift_msg("forward")
     {encryption: shifted_msg, key: key, date: date}
@@ -19,7 +19,7 @@ class Enigma
 
   def decrypt(message, key, date = Time.now.strftime("%d%m%y"))
     create_shift_array(key, date)
-    make_msg_array(message)
+    make_msg_array(message.downcase)
     make_alphabet
     shift_msg("backward")
     {decryption: shifted_msg, key: key, date: date}
