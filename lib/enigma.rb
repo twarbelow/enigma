@@ -29,8 +29,10 @@ class Enigma
     make_msg_array(message.downcase)
     make_alphabet
     find_shift
+    shift_msg("backward")
+    @shifted_msg.reverse!
+    {decryption: shifted_msg, date: date}
   end
-
 
   def make_msg_array(message)
     @msg_array = message.split("")
@@ -68,11 +70,11 @@ class Enigma
   def shift_msg(direction)
     shifted_msg_array = []
     msg_array.each_with_index do |char, index|
-        if direction == "forward"
-          new_value = ((alphabet[char]) + shift_array[index % 4]) % 27
-        else
-          new_value = ((alphabet[char]) - shift_array[index % 4]) % 27
-        end
+      if direction == "forward"
+        new_value = ((alphabet[char]) + shift_array[index % 4]) % 27
+      else
+        new_value = ((alphabet[char]) - shift_array[index % 4]) % 27
+      end
       shifted_msg_array << alphabet.key(new_value)
     end
     @shifted_msg = shifted_msg_array.join
@@ -81,8 +83,8 @@ class Enigma
   def find_shift
     predictable_end = ["d", "n", "e", " "]
     msg_array.reverse!.slice(0..3).map.with_index do |letter, index|
-      @shift_array << (alphabet[letter] - alphabet[predictable_end[index]])
-    end.uniq.flatten
-      # .uniq.flatten is for test purposes, doesn't affect the code
+      @shift_array << (alphabet[predictable_end[index]] - alphabet[letter]).abs
+    end
+    shift_array
   end
 end
