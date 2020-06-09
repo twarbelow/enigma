@@ -79,20 +79,4 @@ class EnigmaTest < MiniTest::Test
     encrypted = encrypt_hash[:encryption]
     assert_equal ({:decryption=> "hello world", :key=> key, :date=> date}), @enigma.decrypt(encrypted, key)
   end
-
-  def test_it_can_find_shift_for_crack
-    @enigma.make_msg_array("vjqtbeaweqihssi")
-    @enigma.make_alphabet
-    assert_equal ([5, 5, 14, 8]), @enigma.find_shift
-  end
-
-  def test_it_can_crack_encryption_with_predictable_end_and_date
-    @enigma.crack("vjqtbeaweqihssi", "291018")
-    assert_equal ("hello world end"),
-    @enigma.shifted_msg
-  end
-
-  def test_it_can_find_key_for_crack
-
-  end
 end

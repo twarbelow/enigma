@@ -25,15 +25,6 @@ class Enigma
     {decryption: shifted_msg, key: key, date: date}
   end
 
-  def crack(message, date)
-    make_msg_array(message.downcase)
-    make_alphabet
-    find_shift
-    shift_msg("backward")
-    @shifted_msg.reverse!
-    {decryption: shifted_msg, date: date}
-  end
-
   def make_msg_array(message)
     @msg_array = message.split("")
   end
@@ -78,13 +69,5 @@ class Enigma
       shifted_msg_array << alphabet.key(new_value)
     end
     @shifted_msg = shifted_msg_array.join
-  end
-
-  def find_shift
-    predictable_end = ["d", "n", "e", " "]
-    msg_array.reverse!.slice(0..3).map.with_index do |letter, index|
-      @shift_array << (alphabet[predictable_end[index]] - alphabet[letter]).abs
-    end
-    shift_array
   end
 end
