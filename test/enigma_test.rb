@@ -81,17 +81,18 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_it_can_find_shift_for_crack
-    @enigma.make_msg_array("hello world end")
-    assert_equal ([14, 5, 5, 8]), @enigma.find_shift
+    @enigma.make_msg_array("vjqtbeaweqihssi")
+    @enigma.make_alphabet
+    assert_equal ([5, 5, 14, 8]), @enigma.find_shift
   end
 
   def test_it_can_crack_encryption_with_predictable_end_and_date
-    skip
-    @enigma.encrypt("hello world end", "08304", "291018")
-    assert_equal ({
-    decryption: "hello world end",
-    date: "291018",
-    key: "08304"}),
     @enigma.crack("vjqtbeaweqihssi", "291018")
+    assert_equal ("hello world end"),
+    @enigma.shifted_msg
+  end
+
+  def test_it_can_find_key_for_crack
+
   end
 end
