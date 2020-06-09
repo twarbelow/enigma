@@ -25,6 +25,13 @@ class Enigma
     {decryption: shifted_msg, key: key, date: date}
   end
 
+  def crack(message, date)
+    make_msg_array(message.downcase)
+    make_alphabet
+    find_shift
+  end
+
+
   def make_msg_array(message)
     @msg_array = message.split("")
   end
@@ -69,5 +76,13 @@ class Enigma
       shifted_msg_array << alphabet.key(new_value)
     end
     @shifted_msg = shifted_msg_array.join
+  end
+
+  def find_shift
+    predictable_end = ["d", "n", "e", " "]
+    msg_array.reverse!.slice(0..3).map.with_index do |letter, index|
+      @shift_array << (alphabet[letter] - alphabet[predictable_end[index]])
+    end.uniq.flatten
+      # .uniq.flatten is for test purposes, doesn't affect the code
   end
 end
