@@ -1,5 +1,13 @@
 # enigma
 
+## Using CLI
+```
+$ ruby ./lib/encrypt.rb message.txt encrypted.txt
+
+$ ruby ./lib/decrypt.rb encrypted.txt decrypted.txt 82648 240818
+```
+
+
 ## Self-Evaluation
 * Functionality 3+
   * enigma class complete with full testing and CLI interface
